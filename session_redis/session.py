@@ -4,7 +4,8 @@
 import json
 import logging
 
-from werkzeug.contrib.sessions import SessionStore
+#from werkzeug.contrib.sessions import SessionStore
+from secure_cookie.session import FilesystemSessionStore
 
 from . import json_encoding
 
@@ -16,7 +17,7 @@ DEFAULT_SESSION_TIMEOUT_ANONYMOUS = 60 * 60 * 3  # 3 hours in seconds
 _logger = logging.getLogger(__name__)
 
 
-class RedisSessionStore(SessionStore):
+class RedisSessionStore(FilesystemSessionStore):
     """ SessionStore that saves session to redis """
 
     def __init__(self, redis, session_class=None,
